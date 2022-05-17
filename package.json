@@ -1,0 +1,20 @@
+{
+  "name": "javascript-cloned_promise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ClonedPromise.js",
+  "scripts": {
+    "test": "mocha",
+    "test_dev": "mocha -w -R min"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=15.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
+  }
+}
