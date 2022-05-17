@@ -136,14 +136,15 @@ class ClonedPromise {
   static all(promises) {
     const results = []
     let completedPromises = 0
+    const promisesLength = promises.length
     return new ClonedPromise((resolve, reject) => {
-      for (let i = 0; i < promises.length; i++) {
+      for (let i = 0; i < promisesLength; i++) {
         const promise = promises[i]
         promise
           .then(value => {
             completedPromises++
             results[i] = value
-            if (completedPromises === promises.length) {
+            if (completedPromises === promisesLength) {
               resolve(results)
             }
           })
@@ -155,8 +156,9 @@ class ClonedPromise {
   static allSettled(promises) {
     const results = []
     let completedPromises = 0
+    const promisesLength = promises.length
     return new ClonedPromise(resolve => {
-      for (let i = 0; i < promises.length; i++) {
+      for (let i = 0; i < promisesLength; i++) {
         const promise = promises[i]
         promise
           .then(value => {
@@ -167,7 +169,7 @@ class ClonedPromise {
           })
           .finally(() => {
             completedPromises++
-            if (completedPromises === promises.length) {
+            if (completedPromises === promisesLength) {
               resolve(results)
             }
           })
@@ -186,13 +188,14 @@ class ClonedPromise {
   static any(promises) {
     const errors = []
     let rejectedPromises = 0
+    const promisesLength = promises.length
     return new ClonedPromise((resolve, reject) => {
-      for (let i = 0; i < promises.length; i++) {
+      for (let i = 0; i < promisesLength; i++) {
         const promise = promises[i]
         promise.then(resolve).catch(value => {
           rejectedPromises++
           errors[i] = value
-          if (rejectedPromises === promises.length) {
+          if (rejectedPromises === promisesLength) {
             reject(new AggregateError(errors, 'All promises were rejected'))
           }
         })
